@@ -2,10 +2,11 @@
 const CACHE_NAME = 'munrox-v1';
 
 const APP_SHELL = [
-  './',
-  './index.html',
-  './manifest.json',
-  './icon.svg',
+  '/munrox/',
+  '/munrox/index.html',
+  '/munrox/manifest.json',
+  '/munrox/icon-192.png',
+  '/munrox/icon-512.png',
 ];
 
 const CDN_RESOURCES = [
@@ -18,10 +19,7 @@ const CDN_RESOURCES = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      // Cache app shell (same-origin, safe to fail on errors)
       cache.addAll(APP_SHELL).catch(() => {});
-
-      // Cache CDN resources individually (opaque responses ok)
       CDN_RESOURCES.forEach(url => {
         fetch(url, { mode: 'cors' })
           .then(res => { if (res.ok) cache.put(url, res); })
@@ -51,7 +49,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Network-first for Google Fonts (stays fresh)
+  // Network-first for Google Fonts
   if (url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com')) {
     event.respondWith(
       fetch(event.request)
@@ -65,7 +63,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Cache-first for everything else (app shell + CDN)
+  // Cache-first for everything else
   event.respondWith(
     caches.match(event.request).then(cached => {
       if (cached) return cached;
@@ -76,9 +74,8 @@ self.addEventListener('fetch', event => {
         }
         return res;
       }).catch(() => {
-        // Offline fallback for navigation requests
         if (event.request.mode === 'navigate') {
-          return caches.match('./index.html');
+          return caches.match('/munrox/index.html');
         }
       });
     })

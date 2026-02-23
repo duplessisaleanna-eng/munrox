@@ -1,9 +1,9 @@
 {
-  "name": "Munrox — Smart Construction App",
+  "name": "Munrox Smart Construction App",
   "short_name": "Munrox",
   "description": "Offline construction quoting and invoicing for South African contractors",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "/munrox/",
+  "scope": "/munrox/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#0F0F0F",
@@ -11,19 +11,19 @@
   "lang": "en-ZA",
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "/munrox/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/munrox/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/munrox/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
